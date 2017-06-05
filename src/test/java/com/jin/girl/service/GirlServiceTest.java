@@ -1,6 +1,6 @@
-package com.jin.service;
+package com.jin.girl.service;
 
-import com.jin.entity.Girl;
+import com.jin.girl.entity.Girl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class GirlServiceTest {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(GirlServiceTest.class);
+
     @Autowired
     private GirlService girlService;
 

@@ -1,4 +1,4 @@
-package com.jin.controller;
+package com.jin.girl.web;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
