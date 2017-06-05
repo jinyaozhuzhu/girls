@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jin.auth.dao.PermissionDao">
+
+    <sql id="PermissionColumns">
+        a.id as "id",
+        a.name as "name",
+        a.permission as "permission",
+        a.href as "href"
+    </sql>
+
+    <sql id="userJoinsRole">
+        LEFT JOIN role_permission rp on a.id = rp.role_id
+        and
+        LEFT JOIN role b on rp.roleId = b.Id
+    </sql>
+
+    <select id="findByRoleId" resultType="Permission">
+        SELECT
+        <include refid="PermissionColumns"/>
+        from user a
+        <include refid="userJoinsRole"/>
+        where b.id = #{roleId}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,59 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD com.example.Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jin.girl.dao.GirlDao">
+
+    <sql id="girlColumns">
+        a.id as "id",
+        a.age as "age",
+        a.cup_size as "cupSize"
+    </sql>
+
+    <select id="findAll" resultType="Girl">
+        SELECT
+        <include refid="girlColumns"/>
+        from girl a
+    </select>
+
+    <select id="findById" resultType="Girl">
+        SELECT
+        <include refid="girlColumns"/>
+        from girl a
+        WHERE a.id = #{id}
+    </select>
+
+    <insert id="save">
+      INSERT
+      INTO girl
+        (
+        age,
+        cup_size
+        )
+      VALUES
+        (
+        #{age},
+        #{cup_size})
+    </insert>
+
+    <update id="update">
+        UPDATE
+        girl
+        <set>
+            <if test="age!=null">
+                age = #{age}
+            </if>
+            <if test="cup_size!=null">
+                cup_size = #{cupSize}
+            </if>
+        </set>
+    </update>
+
+    <delete id="delete">
+      DELETE
+      FROM
+        girl a
+      WHERE
+        a.id = #{id}
+    </delete>
+</mapper>
