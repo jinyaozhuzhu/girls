@@ -27,27 +27,25 @@ public class HttpAspect {
 
     @Before("log()")
     public void doBefore(JoinPoint joinPoint) {
-        logger.info("11111111111");
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         //url
         logger.info("url={}", request.getRequestURL());
         //method
-        logger.info("method={}", request.getMethod());
+//        logger.info("method={}", request.getMethod());
         //ip
-        logger.info("ip = {}", request.getRemoteAddr());
+//        logger.info("ip = {}", request.getRemoteAddr());
         //类方法
         logger.info("class_method={}", joinPoint.getSignature().getDeclaringTypeName()
                 + "." + joinPoint.getSignature().getName());
         //参数
-        logger.info("args={}", joinPoint.getArgs());
+//        logger.info("args={}", joinPoint.getArgs());
 
     }
 
     @After("log()")
     public void doAfter() {
-        logger.info("2222222222222");
     }
 
     @AfterReturning(returning = "object", pointcut = "log()")

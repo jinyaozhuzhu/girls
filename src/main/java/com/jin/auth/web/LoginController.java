@@ -47,4 +47,12 @@ public class LoginController {
         subject.logout();
         return "redirect:logout";
     }
+
+    @GetMapping("index")
+    public String index() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return "index";
+    }
+
 }

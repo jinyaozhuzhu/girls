@@ -3,6 +3,7 @@ package com.jin.girl.web;
 import com.jin.girl.entity.Girl;
 import com.jin.girl.entity.Result;
 import com.jin.girl.service.GirlService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,7 @@ public class GirlController {
      * @return
      */
     @GetMapping("/girls")
+    @RequiresPermissions("girls:view")
     public List<Girl> girlList() {
         return girlService.findAll();
     }
@@ -37,6 +39,7 @@ public class GirlController {
      * @return
      */
     @PostMapping("/girls")
+    @RequiresPermissions("girls:edit")
     public Result<Girl> girlAdd(@Valid Girl girl, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             String errorMessage = bindingResult.getFieldError().getDefaultMessage();
@@ -52,6 +55,7 @@ public class GirlController {
      * @return
      */
     @GetMapping("/girls/{id}")
+    @RequiresPermissions("girls:view")
     public Girl findById(@PathVariable("id") Integer id) {
         System.out.print(id);
         return girlService.findOne(id);
@@ -60,11 +64,13 @@ public class GirlController {
 
     /**
      * 更新一条记录
+     *
      * @param girl
      * @param bindingResult
      * @return
      */
     @PutMapping("/girls/{id}")
+    @RequiresPermissions("girls:edit")
     public Result<Girl> girlUpdate(@Valid Girl girl, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             String errorMessage = bindingResult.getFieldError().getDefaultMessage();
@@ -75,6 +81,7 @@ public class GirlController {
 
 
     @DeleteMapping("/girls/{id}")
+    @RequiresPermissions("girls:edit")
     public void Delete(@PathVariable("id") Integer id) {
         girlService.delete(id);
     }
@@ -87,6 +94,7 @@ public class GirlController {
      * @throws Exception
      */
     @GetMapping(value = "girls/getAge/{id}")
+    @RequiresPermissions("girls:edit")
     public void getAge(@PathVariable("id") Integer id) throws Exception {
         girlService.getAge(id);
     }

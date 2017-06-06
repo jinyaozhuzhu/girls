@@ -12,15 +12,14 @@
     </sql>
 
     <sql id="userJoinsRole">
-        LEFT JOIN role_permission rp on a.id = rp.role_id
-        and
-        LEFT JOIN role b on rp.roleId = b.Id
+        LEFT JOIN role_permission rp on a.id = rp.permission_id
+        LEFT JOIN role b on rp.role_id = b.id
     </sql>
 
     <select id="findByRoleId" resultType="Permission">
         SELECT
         <include refid="PermissionColumns"/>
-        from user a
+        from permission a
         <include refid="userJoinsRole"/>
         where b.id = #{roleId}
     </select>

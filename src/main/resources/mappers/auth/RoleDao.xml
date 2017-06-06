@@ -12,11 +12,10 @@
 
     <sql id="userJoinsRole">
       LEFT JOIN user_role ab on a.id = ab.user_id
-      and
-      LEFT JOIN role b on ab.role_id = b.Id
+        LEFT JOIN role b on ab.role_id = b.id
     </sql>
 
-    <select id="findRoleByUsernamed">
+    <select id="findByUsername" resultType="Role">
         SELECT
         <include refid="roleColumns"/>
         from user a
